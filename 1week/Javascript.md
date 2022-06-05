@@ -112,12 +112,12 @@ my_cat.showAge();
   - 키워드로 사용할 수 있다.
     - 부모 클래스에 대한 필드나 함수를 참조할 수 있다.
 
-### 2.4 =와 ==와 ===
+#### 2.4 =와 ==와 ===
 - **=** 는 할당을 뜻한다. 어떤 변수에 값을 할당할 때 쓴다.
 - **==** 는 등차이다. 유형을 비교하지 않는 등차이다. 변수 값을 기반으로 비교한다. (ex. 0 == "0"은 true를 반환한다.)
 - **===** 도 등차이다. 유형도 비교하는 등차이다. 엄격한 비교라고 생각하면 된다. (ex. 0 === "0"은 false를 반환한다. → 0은 숫자(number)고, "0"은 문자(string)이기 때문이다.)
 
-### 2.5 Spread 연산자 (Spread 문법)
+#### 2.5 Spread 연산자 (Spread 문법)
 - 어떤 객체 안에 있는 요소들을 객체 바깥으로 꺼내주는 것이다.
 
 ```javascript
@@ -131,6 +131,101 @@ let new_array = [...array];
 console.log(new_array);
 ```
 
-### 2.6 조건부 삼항 연산자
+#### 2.6 조건부 삼항 연산자
 - 삼항 연산자는 if문의 단축 형태이다.
 - **사용법: 조건 ? 참일 경우 : 거짓일 경우**
+
+### 3. 자바스크립트 기초(3)
+- 자바스크립트에서 자주 사용하는 **내장 함수들**이다.
+
+#### 3.1 map
+- map은 **배열에 속한 항목을 변환할 때** 많이 사용한다.
+- 어떤 배열에 속한 항목을 원하는 대로 변환하고, 변환한 값을 새로운 배열로 만들어준다.
+- **즉, 원본 배열은 값이 변하지 않는다.**
+
+```javascript
+const array_num = [0, 1, 2, 3, 4, 5];
+
+const new_array = array_num.map((array_item) =>{ 
+ return array_item + 1;
+});
+// 새 배열의 값은 원본 배열 원소에 +1 한 값입니다.
+console.log(new_array);
+// 원본 배열은 그대로 있죠!
+console.log(array_num);
+```
+
+#### 3.2 filter
+- **filter** 는 어떤 조건을 만족하는 항목들만 골라서 새 배열로 만들어주는 함수이다.
+- 원본 배열은 변하지 않고, **원하는 배열을 하나 더 만들 수 있다.**
+
+```javascript
+const array_num = [0, 1, 2, 3, 4, 5];
+
+// forEach(콜백함수)
+const new_array = array_num.filter((array_item) => {
+ // 특정 조건을 만족할 때만 return 하면 됩니다!
+ // return에는 true 혹은 false가 들어가야 해요.
+ return array_item > 3;
+});
+
+console.log(new_array);
+```
+
+#### 3.3 concat
+- **concat**은 배열과 배열을 합치거나 배열에 특정 값을 추가해주는 함수이다.
+- 원본 배열은 변하지 않는다. concat은 중복 항목을 제거해주지 않는다. **다른 내장함수와 함께 사용해서 제거해야 한다.**
+
+```javascript
+const array_num01 = [0, 1, 2, 3];
+const array_num02 = [3, 4, 5];
+
+const merge = array_num01.concat(array_num02);
+
+// 중복 항목(숫자 3)이 제거되었나요? 아니면 그대로 있나요? :)
+console.log(merge);
+```
+
+- 아래 방법도 자주 사용하는 방법이다.
+
+```javascript
+const array_num01 = [0, 1, 2, 3];
+const array_num02 = [3, 4, 5];
+// Set은 자바스크립트의 자료형 중 하나로, 
+// 중복되지 않는 값을 가지는 리스트입니다. :)!
+// ... <- 이 점 3개는 스프레드 문법이라고 불러요.
+// 배열 안에 있는 항목들(요소들)을 전부 꺼내준다는 뜻입니다.
+// 즉 [...array_num01]은 array_num01에 있는 항목을 전부 꺼내 
+// 새로운 배열([] 이 껍데기가 새로운 배열을 뜻하죠!)에 넣어주겠단 말입니다!
+const merge = [...new Set([...array_num01, ...array_num02])];
+
+// 중복 항목(숫자 3)이 제거되었나요? 아니면 그대로 있나요? :)
+console.log(merge);
+```
+
+#### 3.4 from
+- from은 쓰임새가 다양하다.
+  - 배열로 만들고자 하는 것이나 유사배열을 복사해서 새로운 배열로 만들 때
+  - 새로운 배열을 만들 때 (초기화할 때)
+
+- 유사배열이란?
+- **[ 어떤 값들... ]** 이 모양으로 생겼지만 배열의 내장 함수를 사용하지 못하는 것이다. **DOM nodelist** 같은 게 유사배열이다.
+
+```javascript
+// 배열화 하자!
+const my_name = "mean0";
+const my_name_array = Array.from(my_name);
+console.log(my_name_array);
+
+// 길이가 문자열과 같고, 0부터 4까지 숫자를 요소로 갖는 배열을 만들어볼거예요. 
+const text_array = Array.from('hello', (item, idx) => {return idx});
+
+console.log(text_array);
+
+
+// 새 배열을 만들어 보자!(=> 빈 배열을 초기화한다고도 해요.)
+// 길이가 4고, 0부터 3까지 숫자를 요소로 갖는 배열을 만들어볼거예요. 
+const new_array = Array.from({length: 4}, (item, idx)=>{ return idx;});
+
+console.log(new_array);
+```
