@@ -9,7 +9,7 @@
 - **NVM을 사용하는 방법**과 **CRA로 React 프로젝트를 만드는 방법**을 배우기
 - **JSX**를 배우고 써보기
 
-#### 2주차: Component, event listener, react hook
+#### [2주차: Component, event listener, react hook](https://github.com/yujiah-github/ReactStudy/tree/main/2week)
 - 컴포넌트 라이프 사이클을 배우고 본격적으로 **컴포넌트 사용해보기**
 - 마우스 클릭, 키보드 입력, 터치 등 웹 사이트에서 일어나는 **이벤트를 다루는 방법**을 배우기
 - **React hook**을 다뤄보기
