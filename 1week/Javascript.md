@@ -1,4 +1,45 @@
 ## 1주차
+### 1. 자바스크립트 기초(1)
+#### 1.1 document로 DOM에 접근하기
+##### document.getElementsByClassName
+
+```javascript
+const wraps = document.getElementsByClassName("wrap");
+console.log(wraps);
+```
+
+##### document.getElementById
+
+- 이번에는 id로 DOM 요소에 접근할 수 있다. 자바스크립트를 사용해서 CSS 변경도 가능하다. 
+```javascript
+const title = document.getElementById("title");
+// 자바스크립트에서는 어떤 객체의 속성에 접근할 때 .을 이용해 접근할 수 있어요.
+// title이라는 요소의 style 속성에 접근하려면 아래와 같이 title.style로 접근할 수 있습니다!
+// style 안에 있는 속성에 접근할 때도 마찬가지예요. style.backgroundColor로 배경색 속성에 접근할 수 있어요.
+title.style.backgroundColor = "yellow";
+```
+
+##### document.getElementsByTagName
+- 태그명으로도 조작이 가능하다. 버튼을 눌렀을 때 onClick 이벤트를 발생시키는 것도 가능하다.
+
+```javascript
+function sayHello (event) {
+            console.log("hello");             
+         }
+
+         const buttons = document.getElementsByTagName("button");
+
+        // 이 구문은 X! html collection은 유사 배열이기 때문에 array의 내장함수를 쓸 수 없어요!
+        //buttons.map(b => {
+            //console.log(b);
+        //});        
+
+        for (let i=0; i< buttons.length; i++){
+            // .addEventListener()로 클릭 이벤트를 연결해줍니다. 
+            buttons[i].addEventListener("click", sayHello);
+        }
+```
+
 ### 2. 자바스크립트 기초(2)
 #### 2.1 let,const, scope
 - **var** : 함수 단위
